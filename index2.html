@@ -1,0 +1,2019 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="سرد - المنصة العقارية السعودية" />
+    <title>سرد | المنصة العقارية السعودية</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =========================
+   SARD — CINEMATIC REDESIGN
+   ========================= */
+
+      :root {
+        --ink: #071b20;
+        --ink-2: #0d2a30;
+        --teal: #0ba89b;
+        --teal-2: #16c8b6;
+        --teal-dark: #087c74;
+        --cream: #f5f2e9;
+        --paper: #fbfaf6;
+        --line: #d9ddd6;
+        --muted: #707a78;
+        --white: #fff;
+        --danger: #d92748;
+        --shadow: 0 25px 80px rgba(5, 28, 31, 0.1);
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "IBM Plex Sans Arabic", "Cairo", sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+        overflow-x: hidden;
+      }
+      body.menu-open {
+        overflow: hidden;
+      }
+      img {
+        display: block;
+        width: 100%;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      button {
+        font: inherit;
+      }
+      ::selection {
+        background: rgba(11, 168, 155, 0.2);
+        color: var(--ink);
+      }
+      ::-webkit-scrollbar {
+        width: 7px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #edf0eb;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1d6665;
+        border-radius: 99px;
+      }
+
+      .container {
+        width: min(1240px, calc(100% - 48px));
+        margin: auto;
+      }
+      .section {
+        padding: 120px 0;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--teal-dark);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        margin-bottom: 22px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: currentColor;
+      }
+      .eyebrow.light {
+        color: #8de0d7;
+      }
+      .eyebrow.light::before {
+        background: currentColor;
+      }
+
+      /* loader */
+      .page-loader {
+        position: fixed;
+        inset: 0;
+        background: var(--ink);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition:
+          opacity 0.7s var(--ease),
+          visibility 0.7s;
+      }
+      .page-loader.hide {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .loader-mark {
+        width: 58px;
+        height: 58px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        position: relative;
+      }
+      .loader-mark span {
+        font-size: 27px;
+        font-weight: 800;
+        color: var(--teal-2);
+      }
+      .loader-mark i {
+        position: absolute;
+        inset: -7px;
+        border: 1px solid var(--teal);
+        border-left-color: transparent;
+        border-radius: 50%;
+        animation: spin 1.1s linear infinite;
+      }
+      .page-loader p {
+        font-size: 12px;
+        letter-spacing: 0.35em;
+        margin-top: 16px;
+        color: #b6c7c4;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* header */
+      .site-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 100;
+        color: #fff;
+        transition: 0.45s var(--ease);
+      }
+      .site-header.scrolled {
+        background: rgba(5, 27, 31, 0.92);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+      }
+      .nav-wrap {
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        direction: rtl;
+      }
+      .brand strong {
+        font-size: 27px;
+        line-height: 1;
+        font-weight: 900;
+        display: block;
+      }
+      .brand small {
+        display: block;
+        color: rgba(255, 255, 255, 0.62);
+        font-size: 7px;
+        letter-spacing: 0.12em;
+        margin-top: 4px;
+      }
+      .brand-symbol {
+        width: 38px;
+        height: 38px;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        gap: 3px;
+      }
+      .brand-symbol span {
+        display: block;
+        width: 8px;
+        border: 1px solid currentColor;
+        transform: skewY(-28deg);
+        opacity: 0.9;
+      }
+      .brand-symbol span:nth-child(1) {
+        height: 25px;
+      }
+      .brand-symbol span:nth-child(2) {
+        height: 32px;
+      }
+      .brand-symbol span:nth-child(3) {
+        height: 38px;
+      }
+      .desktop-nav {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .nav-link {
+        position: relative;
+        padding: 11px 15px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.72);
+        transition: 0.3s;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        color: #fff;
+      }
+      .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: 2px;
+        right: 15px;
+        width: 22px;
+        height: 2px;
+        background: var(--teal-2);
+        border-radius: 20px;
+      }
+      .nav-cta,
+      .mobile-menu-cta {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background: var(--teal);
+        color: #fff;
+        padding: 12px 17px 12px 13px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+        transition: 0.35s var(--ease);
+        box-shadow: 0 8px 25px rgba(11, 168, 155, 0.22);
+      }
+      .nav-cta b,
+      .mobile-menu-cta span {
+        font-size: 18px;
+        line-height: 1;
+      }
+      .nav-cta:hover {
+        transform: translateY(-2px);
+        background: var(--teal-2);
+      }
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: 0;
+        color: white;
+        width: 42px;
+        height: 42px;
+      }
+      .menu-toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: #fff;
+        margin: 5px auto;
+        transition: 0.3s;
+      }
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 27, 31, 0.98);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+      }
+      .mobile-menu a {
+        font-size: 22px;
+        color: #dce9e6;
+        font-weight: 700;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+
+      /* hero */
+      .hero {
+        min-height: 780px;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .hero-media,
+      .hero-overlay,
+      .hero-grid {
+        position: absolute;
+        inset: 0;
+      }
+      .hero-media img {
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .hero-overlay {
+        background:
+          linear-gradient(
+            90deg,
+            rgba(3, 17, 20, 0.93) 0%,
+            rgba(3, 17, 20, 0.68) 37%,
+            rgba(3, 17, 20, 0.12) 76%
+          ),
+          linear-gradient(
+            0deg,
+            rgba(3, 17, 20, 0.75),
+            transparent 45%,
+            rgba(3, 17, 20, 0.22)
+          );
+      }
+      .hero-grid {
+        opacity: 0.15;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.13) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.13) 1px, transparent 1px);
+        background-size: 80px 80px;
+        mask-image: linear-gradient(to bottom, black, transparent 85%);
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 90px;
+      }
+      .hero-copy {
+        max-width: 650px;
+      }
+      .hero-copy h1 {
+        font-size: clamp(50px, 6.2vw, 92px);
+        line-height: 1.03;
+        letter-spacing: -0.045em;
+        font-weight: 800;
+        margin: 12px 0 25px;
+      }
+      .hero-copy h1 em {
+        display: block;
+        color: var(--teal-2);
+        font-style: normal;
+      }
+      .hero-copy p {
+        max-width: 560px;
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 17px;
+        line-height: 2.05;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 34px;
+      }
+      .btn {
+        min-height: 53px;
+        padding: 0 22px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        font-size: 13px;
+        font-weight: 800;
+        transition: 0.35s var(--ease);
+      }
+      .btn span {
+        font-size: 19px;
+      }
+      .btn-primary {
+        background: var(--teal);
+        color: #fff;
+        box-shadow: 0 15px 35px rgba(11, 168, 155, 0.2);
+      }
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        background: var(--teal-2);
+        box-shadow: 0 20px 40px rgba(11, 168, 155, 0.28);
+      }
+      .btn-ghost {
+        border: 1px solid rgba(255, 255, 255, 0.34);
+        color: #fff;
+      }
+      .btn-ghost:hover {
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .hero-side {
+        align-self: flex-end;
+        margin-bottom: 80px;
+        display: flex;
+        align-items: flex-end;
+        gap: 20px;
+      }
+      .hero-vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 10px;
+      }
+      .hero-vertical i {
+        height: 110px;
+        width: 1px;
+        background: linear-gradient(var(--teal-2), transparent);
+      }
+      .hero-note {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding-bottom: 3px;
+      }
+      .hero-note span {
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .hero-note strong {
+        font-size: 13px;
+      }
+      .hero-bottom {
+        position: absolute;
+        z-index: 3;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+      .scroll-hint {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .scroll-hint i {
+        width: 1px;
+        height: 45px;
+        background: var(--teal-2);
+        position: relative;
+      }
+      .scroll-hint i::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: -3px;
+        width: 7px;
+        height: 7px;
+        border-bottom: 1px solid var(--teal-2);
+        border-left: 1px solid var(--teal-2);
+        transform: rotate(-45deg);
+      }
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        min-width: 660px;
+        background: rgba(4, 23, 26, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(14px);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+      .hero-stat {
+        padding: 17px 22px;
+        border-left: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .hero-stat:last-child {
+        border-left: 0;
+      }
+      .hero-stat strong {
+        font-size: 29px;
+        line-height: 1;
+        font-weight: 800;
+      }
+      .hero-stat b {
+        color: var(--teal-2);
+        font-size: 20px;
+      }
+      .hero-stat span {
+        display: block;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 10px;
+        margin-top: 8px;
+      }
+
+      /* intro */
+      .intro {
+        background: var(--paper);
+        padding-bottom: 75px;
+      }
+      .intro-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 100px;
+        align-items: end;
+      }
+      .intro-title h2,
+      .section-head h2,
+      .about-content h2,
+      .impact-title h2,
+      .cta-copy h2 {
+        font-size: clamp(40px, 4.4vw, 66px);
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+        font-weight: 500;
+      }
+      .intro-title h2 strong,
+      .section-head h2 strong,
+      .about-content h2 strong,
+      .impact-title h2 strong,
+      .cta-copy h2 strong {
+        color: var(--teal-dark);
+        font-weight: 800;
+      }
+      .intro-copy {
+        max-width: 500px;
+      }
+      .intro-copy p {
+        font-size: 18px;
+        line-height: 2;
+        color: #64706e;
+        margin-bottom: 25px;
+      }
+
+      /* links */
+      .text-link {
+        font-weight: 800;
+        font-size: 13px;
+        color: var(--ink);
+        display: inline-flex;
+        gap: 15px;
+        align-items: center;
+      }
+      .text-link span {
+        color: var(--teal);
+        font-size: 20px;
+        transition: 0.3s;
+      }
+      .text-link:hover span {
+        transform: translateX(-5px);
+      }
+
+      /* projects */
+      .projects {
+        background: #eef1ec;
+        padding-top: 95px;
+      }
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 40px;
+        margin-bottom: 42px;
+      }
+      .section-head h2 {
+        font-size: clamp(42px, 4vw, 60px);
+      }
+      .section-head p {
+        max-width: 410px;
+        color: #6f7977;
+        line-height: 1.9;
+        font-size: 14px;
+      }
+      .filters {
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+        margin-bottom: 28px;
+      }
+      .filter {
+        border: 1px solid #d7ddd8;
+        background: transparent;
+        color: #5f6b68;
+        padding: 10px 20px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .filter:hover,
+      .filter.active {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fff;
+      }
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 18px;
+      }
+      .project-card {
+        grid-column: span 4;
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid #e0e4df;
+        transition: 0.5s var(--ease);
+      }
+      .project-card.large {
+        grid-column: span 6;
+      }
+      .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow);
+      }
+      .project-card.hidden {
+        display: none;
+      }
+      .project-image {
+        height: 310px;
+        position: relative;
+        overflow: hidden;
+      }
+      .project-card.large .project-image {
+        height: 390px;
+      }
+      .project-image img {
+        height: 100%;
+        object-fit: cover;
+        transition: 1s var(--ease);
+      }
+      .project-card:hover .project-image img {
+        transform: scale(1.07);
+      }
+      .image-shade {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(4, 21, 24, 0.72),
+          transparent 55%
+        );
+      }
+      .status {
+        position: absolute;
+        bottom: 9px;
+        right: 16px;
+        z-index: 2;
+        padding: 6px 11px;
+        border-radius: 999px;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+      }
+      .status.available {
+        background: #0eaa8e;
+        color: #fff;
+      }
+      .status.sold {
+        background: #df3150;
+        color: #fff;
+      }
+      .project-top {
+        position: absolute;
+        top: 17px;
+        left: 17px;
+        right: 17px;
+        display: flex;
+        justify-content: space-between;
+        color: rgba(255, 255, 255, 0.84);
+        font-size: 10px;
+        z-index: 2;
+      }
+      .project-top > span {
+        padding: 6px 11px;
+        border-radius: 999px;
+        background: #aaa;
+        font-size: 10px;
+      }
+      .project-hover {
+        position: absolute;
+        bottom: 22px;
+        left: 22px;
+        right: 22px;
+        z-index: 3;
+        color: #fff;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: 0.4s var(--ease);
+      }
+      .project-card:hover .project-hover {
+        opacity: 1;
+        transform: none;
+      }
+      .project-hover b {
+        width: 32px;
+        height: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+      }
+      .project-info {
+        padding: 20px;
+      }
+      .project-info h3 {
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+      .project-info p {
+        font-size: 11px;
+        color: #87918f;
+      }
+      .project-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        border-top: 1px solid #e9ece8;
+        margin-top: 17px;
+        padding-top: 14px;
+      }
+      .project-meta span {
+        font-size: 11px;
+        color: #7a8582;
+      }
+      .project-meta strong {
+        font-size: 13px;
+        color: var(--teal-dark);
+      }
+      .project-meta small {
+        font-size: 9px;
+      }
+      .projects-more {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+      }
+      .outline-btn {
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        padding: 13px 23px;
+        font-size: 12px;
+        font-weight: 800;
+        display: inline-flex;
+        gap: 18px;
+        align-items: center;
+        transition: 0.3s;
+      }
+      .outline-btn:hover {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      /* about */
+      .about {
+        background: var(--cream);
+      }
+      .about-wrap {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 90px;
+        align-items: center;
+      }
+      .about-media {
+        position: relative;
+        height: 680px;
+        border-radius: 0 0 140px 0;
+        overflow: hidden;
+      }
+      .about-media img {
+        height: 100%;
+        object-fit: cover;
+      }
+      .about-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(3, 22, 24, 0.72),
+          transparent 55%
+        );
+      }
+      .media-caption {
+        position: absolute;
+        bottom: 35px;
+        right: 35px;
+        z-index: 2;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .media-caption span {
+        font-size: 10px;
+        color: #8de0d7;
+      }
+      .media-caption strong {
+        font-size: 19px;
+      }
+      .media-number {
+        position: absolute;
+        left: 28px;
+        top: 28px;
+        z-index: 2;
+        color: #fff;
+        font-size: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: grid;
+        place-items: center;
+      }
+      .about-content {
+        padding: 20px 0;
+      }
+      .about-content h2 {
+        font-size: clamp(42px, 4.2vw, 62px);
+        margin-bottom: 25px;
+      }
+      .about-content > p {
+        color: #66716f;
+        line-height: 2;
+        font-size: 14px;
+        margin-bottom: 13px;
+        max-width: 550px;
+      }
+      .about-points {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 42px 0 30px;
+      }
+      .about-points > div {
+        border-top: 1px solid #ccd4cd;
+        padding-top: 15px;
+      }
+      .about-points span {
+        color: var(--teal-dark);
+        font-size: 10px;
+      }
+      .about-points strong {
+        display: block;
+        font-size: 16px;
+        margin: 12px 0 5px;
+      }
+      .about-points p {
+        font-size: 10px;
+        color: #77827f;
+        line-height: 1.7;
+      }
+
+      /* partners */
+      .partners {
+        background: #fff;
+      }
+      .section-head.compact {
+        margin-bottom: 65px;
+      }
+      .partners-list {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        border-top: 1px solid #dfe4df;
+        border-bottom: 1px solid #dfe4df;
+      }
+      .partner {
+        min-height: 145px;
+        border-left: 1px solid #dfe4df;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: #4c5654;
+        transition: 0.3s;
+      }
+      .partner:first-child {
+        border-left: 0;
+      }
+      .partner b {
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+      }
+      .partner span {
+        font-size: 7px;
+        letter-spacing: 0.14em;
+        color: #9ca4a2;
+      }
+      .partner:hover {
+        background: #f3f6f2;
+        color: var(--teal-dark);
+      }
+
+      /* impact */
+      .impact {
+        position: relative;
+        min-height: 420px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+      .impact-image {
+        position: absolute;
+        inset: 0;
+        background: url("https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?auto=format&fit=crop&w=2200&q=85")
+          center/cover;
+      }
+      .impact-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(3, 20, 23, 0.95),
+          rgba(3, 20, 23, 0.68),
+          rgba(3, 20, 23, 0.6)
+        );
+      }
+      .impact-content {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 100px;
+        align-items: center;
+      }
+      .impact-title h2 {
+        font-size: clamp(45px, 4.5vw, 65px);
+      }
+      .impact-title h2 strong {
+        color: #8de0d7;
+      }
+      .impact-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0;
+        border-right: 1px solid rgba(255, 255, 255, 0.16);
+      }
+      .impact-stats > div {
+        padding: 25px 35px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        border-left: 1px solid rgba(255, 255, 255, 0.16);
+      }
+      .impact-stats > div:nth-child(3),
+      .impact-stats > div:nth-child(4) {
+        border-bottom: 0;
+      }
+      .impact-stats strong {
+        font-size: 48px;
+        line-height: 1;
+        font-weight: 500;
+      }
+      .impact-stats span {
+        display: block;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 20px;
+        margin-top: 10px;
+      }
+
+      /* CTA */
+      .final-cta {
+        background: var(--paper);
+        padding: 90px 0;
+      }
+      .cta-card {
+        min-height: 360px;
+        background: var(--ink);
+        border-radius: 30px;
+        padding: 65px 75px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 50px;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-card::before,
+      .cta-card::after {
+        content: "";
+        position: absolute;
+        border: 1px solid rgba(21, 200, 182, 0.15);
+        border-radius: 50%;
+      }
+      .cta-card::before {
+        width: 450px;
+        height: 450px;
+        left: -170px;
+        bottom: -250px;
+      }
+      .cta-card::after {
+        width: 600px;
+        height: 600px;
+        right: -350px;
+        top: -350px;
+      }
+      .cta-glow {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        right: 15%;
+        top: -280px;
+        background: var(--teal);
+        filter: blur(130px);
+        opacity: 0.13;
+      }
+      .cta-copy {
+        position: relative;
+        z-index: 2;
+      }
+      .cta-copy h2 {
+        font-size: clamp(38px, 4vw, 60px);
+      }
+      .cta-copy h2 strong {
+        color: #8de0d7;
+      }
+      .cta-copy p {
+        color: #91a09d;
+        font-size: 13px;
+        margin-top: 18px;
+      }
+      .cta-card .btn {
+        position: relative;
+        z-index: 2;
+        min-width: 160px;
+      }
+
+      /* footer */
+      .footer {
+        background: #06181c;
+        color: #fff;
+        padding-top: 75px;
+      }
+      .footer-main {
+        display: grid;
+        grid-template-columns: 1.5fr 0.8fr 0.8fr;
+        gap: 80px;
+        padding-bottom: 65px;
+      }
+      .footer-brand p {
+        max-width: 320px;
+        color: #71817e;
+        font-size: 12px;
+        line-height: 2;
+        margin-top: 22px;
+      }
+      .footer-nav,
+      .footer-contact {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+      }
+      .footer-nav > span,
+      .footer-contact > span {
+        color: #8de0d7;
+        font-size: 10px;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+      .footer-nav a,
+      .footer-contact a,
+      .footer-contact p {
+        font-size: 12px;
+        color: #91a09d;
+        transition: 0.25s;
+      }
+      .footer-nav a:hover,
+      .footer-contact a:hover {
+        color: #fff;
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        color: #61716e;
+        font-size: 9px;
+      }
+
+      /* reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.8s var(--ease),
+          transform 0.8s var(--ease);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* responsive */
+      @media (max-width: 1050px) {
+        .desktop-nav {
+          display: none;
+        }
+        .nav-cta {
+          display: none;
+        }
+        .menu-toggle {
+          display: block;
+        }
+        .hero-content {
+          align-items: flex-start;
+        }
+        .hero-side {
+          display: none;
+        }
+        .hero-bottom {
+          display: block;
+        }
+        .scroll-hint {
+          display: none;
+        }
+        .hero-stats {
+          min-width: 0;
+          width: 100%;
+          margin-top: 25px;
+        }
+        .intro-grid,
+        .about-wrap,
+        .impact-content {
+          grid-template-columns: 1fr;
+          gap: 45px;
+        }
+        .about-media {
+          height: 560px;
+        }
+        .impact-content {
+          padding-top: 80px;
+          padding-bottom: 80px;
+        }
+        .partners-list {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .partner:nth-child(4) {
+          border-left: 0;
+          border-top: 1px solid #dfe4df;
+        }
+        .partner:nth-child(5),
+        .partner:nth-child(6) {
+          border-top: 1px solid #dfe4df;
+        }
+      }
+      @media (max-width: 760px) {
+        .container {
+          width: min(100% - 30px, 1240px);
+        }
+        .section {
+          padding: 80px 0;
+        }
+        .hero {
+          min-height: 780px;
+        }
+        .hero-content {
+          padding-top: 130px;
+        }
+        .hero-copy h1 {
+          font-size: 50px;
+        }
+        .hero-copy p {
+          font-size: 14px;
+        }
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+          max-width: 260px;
+        }
+        .btn {
+          width: 100%;
+        }
+        .hero-bottom {
+          bottom: 20px;
+        }
+        .hero-stats {
+          grid-template-columns: repeat(2, 1fr);
+          border-radius: 15px;
+        }
+        .hero-stat:nth-child(2) {
+          border-left: 0;
+        }
+        .hero-stat:nth-child(-n + 2) {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .intro-grid {
+          gap: 25px;
+        }
+        .section-head {
+          display: block;
+        }
+        .section-head p {
+          margin-top: 20px;
+        }
+        .project-grid {
+          display: block;
+        }
+        .project-card,
+        .project-card.large {
+          margin-bottom: 16px;
+        }
+        .project-image,
+        .project-card.large .project-image {
+          height: 330px;
+        }
+        .about-media {
+          height: 470px;
+          border-radius: 0 0 80px 0;
+        }
+        .about-points {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+        .about-points > div {
+          display: grid;
+          grid-template-columns: 35px 1fr;
+          column-gap: 10px;
+        }
+        .about-points span {
+          grid-row: span 2;
+        }
+        .about-points p {
+          grid-column: 2;
+        }
+        .partners-list {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .partner {
+          border-left: 1px solid #dfe4df !important;
+          border-top: 1px solid #dfe4df;
+        }
+        .partner:nth-child(odd) {
+          border-left: 0 !important;
+        }
+        .partner:nth-child(-n + 2) {
+          border-top: 0;
+        }
+        .impact-content {
+          gap: 35px;
+        }
+        .impact-stats {
+          grid-template-columns: 1fr 1fr;
+        }
+        .impact-stats strong {
+          font-size: 35px;
+        }
+        .impact-stats > div {
+          padding: 20px;
+        }
+        .cta-card {
+          padding: 45px 28px;
+          min-height: 450px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+        }
+        .footer-main {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+      @media (max-width: 430px) {
+        .brand strong {
+          font-size: 24px;
+        }
+        .hero-copy h1 {
+          font-size: 43px;
+        }
+        .hero-stats {
+          grid-template-columns: 1fr 1fr;
+        }
+        .hero-stat {
+          padding: 14px;
+        }
+        .hero-stat strong {
+          font-size: 23px;
+        }
+        .filters {
+          overflow: auto;
+          flex-wrap: nowrap;
+          padding-bottom: 5px;
+        }
+        .filter {
+          white-space: nowrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="page-loader" id="pageLoader">
+      <div class="loader-mark">
+        <span>س</span>
+        <i></i>
+      </div>
+      <p>سرد</p>
+    </div> -->
+
+    <header class="site-header" id="siteHeader">
+      <div class="container nav-wrap">
+        <a href="#home" class="brand" aria-label="سرد">
+          <div class="brand-symbol">
+            <span></span><span></span><span></span>
+          </div>
+          <div>
+            <strong>سرد</strong>
+            <small>المنصة العقارية السعودية</small>
+          </div>
+        </a>
+
+        <nav class="desktop-nav">
+          <a class="nav-link active" href="#home">الرئيسية</a>
+          <a class="nav-link" href="#projects">المشاريع</a>
+          <a class="nav-link" href="#about">عن سرد</a>
+          <a class="nav-link" href="#partners">شركاء النجاح</a>
+          <a class="nav-link" href="#contact">تواصل معنا</a>
+        </nav>
+
+        <a href="#projects" class="nav-cta">
+          <span>استكشف المشاريع</span>
+          <b>←</b>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">الرئيسية</a>
+        <a href="#projects">المشاريع</a>
+        <a href="#about">عن سرد</a>
+        <a href="#partners">شركاء النجاح</a>
+        <a href="#contact">تواصل معنا</a>
+        <a href="#projects" class="mobile-menu-cta"
+          >استكشف المشاريع <span>←</span></a
+        >
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="home">
+        <div class="hero-media">
+          <img
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2200&q=90"
+            alt="مشروع عقاري فاخر"
+          />
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-grid"></div>
+
+        <div class="container hero-content">
+          <div class="hero-copy reveal">
+            <span class="eyebrow light">المنصة العقارية السعودية</span>
+            <h1>
+              أين تبدأ
+              <em>قصتك العقارية؟</em>
+            </h1>
+            <p>
+              اكتشف فرصًا عقارية استثنائية في المملكة العربية السعودية، واختَر
+              مساحة تصنع لك قيمة اليوم وتبني مستقبلك غدًا.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#projects" class="btn btn-primary">
+                تصفح المشاريع <span>←</span>
+              </a>
+              <a href="#about" class="btn btn-ghost"> تعرّف على سرد </a>
+            </div>
+          </div>
+
+          <div class="hero-side reveal">
+            <div class="hero-vertical">
+              <span>01</span>
+              <i></i>
+              <span>05</span>
+            </div>
+            <div class="hero-note">
+              <span>وجهتك العقارية</span>
+              <strong>اختيارات أذكى. قيمة أطول.</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="container hero-bottom">
+          <div class="scroll-hint">
+            <span></span>
+            <!-- <i></i> -->
+          </div>
+
+          <div class="hero-stats reveal">
+            <div class="hero-stat">
+              <strong class="counter" data-target="150">0</strong><b>+</b>
+              <span>مشروع عقاري</span>
+            </div>
+            <div class="hero-stat">
+              <strong class="counter" data-target="12000">0</strong><b>+</b>
+              <span>وحدة سكنية</span>
+            </div>
+            <div class="hero-stat">
+              <strong class="counter" data-target="8500">0</strong><b>+</b>
+              <span>وحدة متاحة</span>
+            </div>
+            <div class="hero-stat">
+              <strong class="counter" data-target="50">0</strong><b>+</b>
+              <span>شريك نجاح</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTRO -->
+      <section class="intro section">
+        <div class="container intro-grid">
+          <div class="intro-title reveal">
+            <span class="eyebrow">المشاريع</span>
+            <h2>عقارات<br /><strong>تُبنى عليها الحياة.</strong></h2>
+          </div>
+          <div class="intro-copy reveal">
+            <p>
+              في سرد، لا نعرض لك عقارًا فقط. نحن نقرّب لك الصورة كاملة: الموقع،
+              القيمة، أسلوب الحياة، وفرصة النمو.
+            </p>
+            <a href="#projects" class="text-link"
+              >اكتشف المجموعة كاملة <span>←</span></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="projects section" id="projects">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <span class="eyebrow">مختارات سرد</span>
+              <h2>أحدث المشاريع<br /><strong>العقارية</strong></h2>
+            </div>
+            <p>
+              مجموعة مختارة من المشاريع التي تجمع الموقع، التصميم، والقيمة في
+              تجربة واحدة.
+            </p>
+          </div>
+
+          <div class="filters reveal" id="filters">
+            <button class="filter active" data-filter="all">الكل</button>
+            <button class="filter" data-filter="residential">سكني</button>
+            <button class="filter" data-filter="commercial">تجاري</button>
+            <button class="filter" data-filter="coastal">ساحلي</button>
+            <button class="filter" data-filter="sold">مباع</button>
+          </div>
+
+          <div class="project-grid" id="projectGrid">
+            <article
+              class="project-card large reveal"
+              data-category="residential"
+            >
+              <div class="project-image">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85"
+                  alt="مجمع الواحة السكني"
+                />
+                <span class="status available">متاح</span>
+                <div class="image-shade"></div>
+                <div class="project-top">
+                  <span>سكني</span>
+                  <span>الرياض</span>
+                </div>
+                <div class="project-hover">استكشف المشروع <b>←</b></div>
+              </div>
+              <div class="project-info">
+                <div>
+                  <h3>مجمع الواحة السكني</h3>
+                  <p>الرياض · حي النخيل</p>
+                </div>
+                <div class="project-meta">
+                  <span>120 وحدة</span>
+                  <strong>يبدأ من 850,000 <small>ر.س</small></strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="commercial">
+              <div class="project-image">
+                <img
+                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1100&q=85"
+                  alt="برج الأفق التجاري"
+                />
+                <span class="status available">متاح</span>
+                <div class="image-shade"></div>
+                <div class="project-top">
+                  <span>تجاري</span>
+                  <span>جدة</span>
+                </div>
+                <div class="project-hover">استكشف المشروع <b>←</b></div>
+              </div>
+              <div class="project-info">
+                <div>
+                  <h3>برج الأفق التجاري</h3>
+                  <p>جدة · طريق الملك</p>
+                </div>
+                <div class="project-meta">
+                  <span>60 وحدة</span>
+                  <strong>يبدأ من 1,200,000 <small>ر.س</small></strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="coastal">
+              <div class="project-image">
+                <img
+                  src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1100&q=85"
+                  alt="كمبوند الياسمين"
+                />
+                <span class="status sold">SOLD OUT</span>
+                <div class="image-shade"></div>
+                <div class="project-top">
+                  <span>ساحلي</span>
+                  <span>الوجه</span>
+                </div>
+                <div class="project-hover">استكشف المشروع <b>←</b></div>
+              </div>
+              <div class="project-info">
+                <div>
+                  <h3>كمبوند الياسمين</h3>
+                  <p>الساحل · البحر الأحمر</p>
+                </div>
+                <div class="project-meta">
+                  <span>15 وحدة</span>
+                  <strong>يبدأ من 3,200,000 <small>ر.س</small></strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="commercial">
+              <div class="project-image">
+                <img
+                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1100&q=85"
+                  alt="مجمع الأعمال المتكامل"
+                />
+                <span class="status available">متاح</span>
+                <div class="image-shade"></div>
+                <div class="project-top">
+                  <span>تجاري</span>
+                  <span>الرياض</span>
+                </div>
+                <div class="project-hover">استكشف المشروع <b>←</b></div>
+              </div>
+              <div class="project-info">
+                <div>
+                  <h3>مجمع الأعمال المتكامل</h3>
+                  <p>الرياض · المدينة الرقمية</p>
+                </div>
+                <div class="project-meta">
+                  <span>150 وحدة</span>
+                  <strong>يبدأ من 950,000 <small>ر.س</small></strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal" data-category="residential">
+              <div class="project-image">
+                <img
+                  src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1100&q=85"
+                  alt="مجمع الورود السكني"
+                />
+                <span class="status available">متاح</span>
+                <div class="image-shade"></div>
+                <div class="project-top">
+                  <span>سكني</span>
+                  <span>الرياض</span>
+                </div>
+                <div class="project-hover">استكشف المشروع <b>←</b></div>
+              </div>
+              <div class="project-info">
+                <div>
+                  <h3>مجمع الورود السكني</h3>
+                  <p>الرياض · حي الياسمين</p>
+                </div>
+                <div class="project-meta">
+                  <span>200 وحدة</span>
+                  <strong>يبدأ من 650,000 <small>ر.س</small></strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card large reveal" data-category="sold">
+              <div class="project-image">
+                <img
+                  src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85"
+                  alt="فلل المرجان الفاخرة"
+                />
+                <span class="status sold">SOLD OUT</span>
+                <div class="image-shade"></div>
+                <div class="project-top">
+                  <span>فلل</span>
+                  <span>المنطقة الشرقية</span>
+                </div>
+                <div class="project-hover">استكشف المشروع <b>←</b></div>
+              </div>
+              <div class="project-info">
+                <div>
+                  <h3>فلل المرجان الفاخرة</h3>
+                  <p>الدمام · الواجهة البحرية</p>
+                </div>
+                <div class="project-meta">
+                  <span>25 وحدة</span>
+                  <strong>يبدأ من 2,500,000 <small>ر.س</small></strong>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="projects-more reveal">
+            <a href="#contact" class="outline-btn"
+              >عرض جميع المشاريع <span>←</span></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="about section" id="about">
+        <div class="container about-wrap">
+          <div class="about-media reveal">
+            <img
+              src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1500&q=90"
+              alt="تصميم داخلي فاخر"
+            />
+            <div class="media-caption">
+              <span>رؤية سرد</span>
+              <strong>مساحات تليق بما تطمح إليه.</strong>
+            </div>
+            <div class="media-number">01</div>
+          </div>
+
+          <div class="about-content reveal">
+            <span class="eyebrow">عن سرد</span>
+            <h2>نربطك بالعقار<br /><strong>الذي يشبهك.</strong></h2>
+            <p>
+              سرد منصة عقارية سعودية صُممت لتجعل البحث عن العقار أكثر وضوحًا،
+              وأكثر ثقة، وأكثر قربًا من احتياجك الحقيقي.
+            </p>
+            <p>
+              نجمع المشاريع في مكان واحد، ونمنحك المعلومات التي تساعدك على رؤية
+              الصورة كاملة قبل اتخاذ قرارك.
+            </p>
+
+            <div class="about-points">
+              <div>
+                <span>01</span>
+                <strong>وضوح</strong>
+                <p>معلومات منظمة تساعدك على المقارنة.</p>
+              </div>
+              <div>
+                <span>02</span>
+                <strong>اختيار</strong>
+                <p>مشاريع منتقاة في مواقع مميزة.</p>
+              </div>
+              <div>
+                <span>03</span>
+                <strong>قيمة</strong>
+                <p>نظرة أبعد من السعر نحو القيمة.</p>
+              </div>
+            </div>
+
+            <a href="#contact" class="text-link"
+              >اعرف أكثر عن سرد <span>←</span></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- PARTNERS -->
+      <section class="partners section" id="partners">
+        <div class="container">
+          <div class="section-head compact reveal">
+            <div>
+              <span class="eyebrow">شركاء النجاح</span>
+              <h2>نبني الثقة<br /><strong>معًا.</strong></h2>
+            </div>
+            <p>
+              نتعاون مع مطورين وعلامات رائدة لنقدم لك فرصًا عقارية موثوقة
+              ومتنوعة.
+            </p>
+          </div>
+
+          <div class="partners-list reveal">
+            <div class="partner">
+              <b>دار الأركان</b><span>DEAR AL ARKAN</span>
+            </div>
+            <div class="partner"><b>الدار</b><span>ALDAR</span></div>
+            <div class="partner"><b>روشن</b><span>ROSHN</span></div>
+            <div class="partner"><b>إعمار</b><span>EMAAR</span></div>
+            <div class="partner"><b>سِدرة</b><span>SIDRA</span></div>
+            <div class="partner"><b>رؤية</b><span>VISION</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- IMPACT -->
+      <section class="impact">
+        <div class="impact-image"></div>
+        <div class="impact-overlay"></div>
+        <div class="container impact-content">
+          <div class="impact-title reveal">
+            <span class="eyebrow light">أرقام تتحدث عن نفسها</span>
+            <h2>نجاحنا<br /><strong>في أرقام.</strong></h2>
+          </div>
+
+          <div class="impact-stats reveal">
+            <div>
+              <strong><span class="counter" data-target="35">0</span>+</strong>
+              <span>شريك تطوير</span>
+            </div>
+            <div>
+              <strong><span class="counter" data-target="15">0</span>+</strong>
+              <span>مدينة سعودية</span>
+            </div>
+            <div>
+              <strong><span class="counter" data-target="8">0</span>+</strong>
+              <span>سنوات خبرة</span>
+            </div>
+            <div>
+              <strong>98%</strong>
+              <span>نسبة الرضا</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="final-cta section" id="contact">
+        <div class="container">
+          <div class="cta-card reveal">
+            <div class="cta-glow"></div>
+            <div class="cta-copy">
+              <span class="eyebrow light">جاهز تبدأ؟</span>
+              <h2>خلّ خطوتك القادمة<br /><strong>تستحق أن تُروى.</strong></h2>
+              <p>تواصل معنا واكتشف فرصتك العقارية القادمة.</p>
+            </div>
+            <a href="mailto:info@sard.sa" class="btn btn-primary"
+              >تواصل معنا <span>←</span></a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-main">
+        <div class="footer-brand">
+          <a href="#home" class="brand">
+            <div class="brand-symbol">
+              <span></span><span></span><span></span>
+            </div>
+            <div>
+              <strong>سرد</strong>
+              <small>المنصة العقارية السعودية</small>
+            </div>
+          </a>
+          <p>نقرب لك العقار الذي يستحق أن يكون جزءًا من قصتك.</p>
+        </div>
+
+        <div class="footer-nav">
+          <span>استكشف</span>
+          <a href="#projects">المشاريع</a>
+          <a href="#about">عن سرد</a>
+          <a href="#partners">شركاء النجاح</a>
+          <a href="#contact">تواصل معنا</a>
+        </div>
+
+        <div class="footer-contact">
+          <span>تواصل معنا</span>
+          <a href="tel:+966500000000">+966 50 000 0000</a>
+          <a href="mailto:info@sard.sa">info@sard.sa</a>
+          <p>المملكة العربية السعودية</p>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <span>© 2026 سرد. جميع الحقوق محفوظة.</span>
+        <span>سياسة الخصوصية - شروط الأحكام</span>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const loader = document.getElementById("pageLoader");
+        const header = document.getElementById("siteHeader");
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+        const navLinks = [...document.querySelectorAll(".nav-link")];
+        const mobileLinks = [...document.querySelectorAll(".mobile-menu a")];
+        const sections = [...document.querySelectorAll("main section[id]")];
+        const revealItems = document.querySelectorAll(".reveal");
+        const counters = document.querySelectorAll(".counter");
+        const filters = document.querySelectorAll(".filter");
+        const cards = document.querySelectorAll(".project-card");
+
+        // Loader
+        // window.addEventListener("load", () => {
+        //   setTimeout(() => loader.classList.add("hide"), 500);
+        // });
+
+        // Header
+        const handleHeader = () => {
+          header.classList.toggle("scrolled", window.scrollY > 35);
+        };
+        handleHeader();
+        window.addEventListener("scroll", handleHeader, { passive: true });
+
+        // Mobile menu
+        menuToggle.addEventListener("click", () => {
+          const open = mobileMenu.classList.toggle("open");
+          document.body.classList.toggle("menu-open", open);
+          menuToggle.setAttribute(
+            "aria-label",
+            open ? "إغلاق القائمة" : "فتح القائمة",
+          );
+          menuToggle.classList.toggle("is-open", open);
+        });
+
+        mobileLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.remove("open");
+            document.body.classList.remove("menu-open");
+            menuToggle.classList.remove("is-open");
+          });
+        });
+
+        // Reveal on scroll
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+
+        revealItems.forEach((item) => revealObserver.observe(item));
+
+        // Counters
+        const formatNumber = (n) => new Intl.NumberFormat("en-US").format(n);
+
+        const runCounter = (el) => {
+          if (el.dataset.done === "true") return;
+          el.dataset.done = "true";
+
+          const target = Number(el.dataset.target || 0);
+          const duration = 1600;
+          const start = performance.now();
+
+          const tick = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 4);
+            el.textContent = formatNumber(Math.floor(target * eased));
+
+            if (progress < 1) requestAnimationFrame(tick);
+            else el.textContent = formatNumber(target);
+          };
+
+          requestAnimationFrame(tick);
+        };
+
+        const counterObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                runCounter(entry.target);
+                counterObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.6 },
+        );
+
+        counters.forEach((counter) => counterObserver.observe(counter));
+
+        // Project filters
+        filters.forEach((filter) => {
+          filter.addEventListener("click", () => {
+            filters.forEach((btn) => btn.classList.remove("active"));
+            filter.classList.add("active");
+
+            const category = filter.dataset.filter;
+
+            cards.forEach((card) => {
+              const show =
+                category === "all" || card.dataset.category === category;
+
+              if (show) {
+                card.classList.remove("hidden");
+                requestAnimationFrame(() => {
+                  card.animate(
+                    [
+                      { opacity: 0, transform: "translateY(15px) scale(.98)" },
+                      { opacity: 1, transform: "translateY(0) scale(1)" },
+                    ],
+                    { duration: 420, easing: "cubic-bezier(.22,1,.36,1)" },
+                  );
+                });
+              } else {
+                card.classList.add("hidden");
+              }
+            });
+          });
+        });
+
+        // Active navigation
+        const navObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                navLinks.forEach((link) => {
+                  link.classList.toggle(
+                    "active",
+                    link.getAttribute("href") === `#${entry.target.id}`,
+                  );
+                });
+              }
+            });
+          },
+          { rootMargin: "-35% 0px -55% 0px" },
+        );
+
+        sections.forEach((section) => navObserver.observe(section));
+
+        // Smooth anchor scrolling with header offset
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+          link.addEventListener("click", (e) => {
+            const id = link.getAttribute("href");
+            if (!id || id === "#") return;
+
+            const target = document.querySelector(id);
+            if (!target) return;
+
+            e.preventDefault();
+
+            const offset = header.offsetHeight - 5;
+            const top =
+              target.getBoundingClientRect().top + window.scrollY - offset;
+
+            window.scrollTo({
+              top,
+              behavior: "smooth",
+            });
+          });
+        });
+
+        // Tiny parallax on desktop hero
+        const heroImage = document.querySelector(".hero-media img");
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (!heroImage || window.innerWidth < 900) return;
+            const y = Math.min(window.scrollY * 0.08, 70);
+            heroImage.style.transform = `translateY(${y}px) scale(1.03)`;
+          },
+          { passive: true },
+        );
+      });
+    </script>
+
+    <style>
+        #sard-switch{position:fixed;bottom:26px;right:26px;z-index:60;display:flex;align-items:center;gap:9px;padding:12px 18px;border-radius:999px;background:rgba(6,29,33,.94);backdrop-filter:blur(12px);color:#eaf7f4;font-family:'Cairo','IBM Plex Sans Arabic',sans-serif;font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,.14);box-shadow:0 12px 34px rgba(0,0,0,.28);text-decoration:none;transition:transform .3s var(--ease),border-color .3s,background .3s,box-shadow .3s}
+        #sard-switch:hover{transform:translateY(-2px);border-color:var(--teal-2);color:#fff;box-shadow:0 16px 40px rgba(0,0,0,.35)}
+        #sard-switch .sard-switch-badge{width:9px;height:9px;border-radius:50%;background:var(--teal-2);box-shadow:0 0 0 4px rgba(16,200,182,.18)}
+        @media(max-width:640px){#sard-switch{bottom:18px;right:18px;padding:11px 15px;font-size:12px}}
+    </style>
+    <a id="sard-switch" href="index.html" aria-label="الانتقال إلى التصميم الأول">
+        <i class="sard-switch-badge"></i>
+        <span>التصميم الأول</span>
+    </a>
+  </body>
+</html>
